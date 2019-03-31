@@ -14,6 +14,7 @@ document.getElementById("stat").addEventListener("click", function (event) {
 
     "<b>Клавиатура</b>" + "<br>" +
     "===============" + "<br>" +
+    "Скорость нажатия клавиш: " + arrayAvr(a_keyboard_keydown_speed) + "<br>" +
     "Скорость печати: " + keyboard_avr_speed_press(a_keyboard_keyspeed) + "<br>";
 });
 
@@ -90,10 +91,22 @@ document.addEventListener("mousemove", function (event) {
 });
 
 
-var a_keyboard_keyspeed = [];
+var s_keyboard_down = {keycode:0,time:0};
+
+var a_keyboard_keyspeed = []; // скорость нажатия от клавиши к клавише
+var a_keyboard_keydown_speed = []; // время нажал - отпустил одну и ту же кнопку
 
 document.addEventListener("keydown", function (event) {
   a_keyboard_keyspeed.push(Date.now());
+  s_keyboard_down.keycode = event.keyCode;
+  s_keyboard_down.time = Date.now();
+})
+
+document.addEventListener("keyup", function (event) {
+  if(event.keyCode == s_keyboard_down.keycode)
+    var speed = Date.now()-s_keyboard_down.time;
+    if(speed > 10)
+      a_keyboard_keydown_speed.push(Date.now()-s_keyboard_down.time);
 })
 
 // когда будем считать - расстояния больше 3 секунд в учет не берем между символами
