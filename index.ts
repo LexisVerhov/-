@@ -9,13 +9,14 @@ document.getElementById("stat").addEventListener("click", function (event) {
   document.getElementById("stat-div").innerHTML = "<b>Мышь</b><br>" +
     "Скорость движения мыши: " + mouseSpeedAvr(a_mouse_move_path) + "<br>" +
     "Скорость клика левой кнопкой мыши: " + arrayAvr(a_mouse_button_left_speed) + "<br>" +
-    "Скорость прокрутки: " + "<br>" +
-    "Скорость отклика скрола мыши: " + "<br><br>" +
+    "Скорость между прокруткой: " + arrayAvr(milis) + "<br><br>" +
 
     "<b>Клавиатура</b>" + "<br>" +
     "===============" + "<br>" +
     "Скорость нажатия клавиш: " + arrayAvr(a_keyboard_keydown_speed) + "<br>" +
     "Скорость печати: " + keyboard_avr_speed_press(a_keyboard_keyspeed) + "<br>";
+
+    console.log(milis);
 });
 
 
@@ -72,13 +73,11 @@ document.addEventListener("mousedown", function (event) {
 
 document.addEventListener("mouseup", function (event) {
   if (event.which === 1) {
-    var x = event.clientX - mouse_button_left.x;
-    var y = event.clientY - mouse_button_left.y;
-    if (Math.sqrt(x * x + y * y) < (screen.width * 0.08)){
+    if (mouse_button_left.x == event.clientX &&
+        mouse_button_left.y == event.clientY){
         mouse_button_left.time = Date.now() - mouse_button_left.time;
         if(mouse_button_left.time > 15){
             a_mouse_button_left_speed.push(mouse_button_left.time);
-            console.log(mouse_button_left.time);
            }
         }
     }
@@ -126,3 +125,24 @@ function keyboard_avr_speed_press(array) {
 
   return sum / speed_array.length;
 }
+
+
+
+
+    var milis = [];
+    var lastTime = 0;
+    var d = new Date();
+    var time = d.getTime();
+
+    setInterval(function() {
+        time++;
+    }, 1);
+
+    document.addEventListener("wheel", function(e) {
+        var cmilis = time - lastTime;
+        if(lastTime && cmilis < 2500) {
+            milis.push(cmilis);
+        }
+        lastTime = time;
+    });
+
