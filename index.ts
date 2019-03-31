@@ -93,8 +93,8 @@ function calculate_touch(array){
   var time_array = [];
   for(var i=0; i < array.length; i++){
     var time = array[i].time2 - array[i].time;
-    var x = array[i].x - array[i].x;
-    var y = array[i].y - array[i].y;
+    var x = array[i].x2 - array[i].x;
+    var y = array[i].y2 - array[i].y;
     var speed = Math.sqrt(x * x + y * y) / time;
     speed_array.push(speed);
     time_array.push(time);
