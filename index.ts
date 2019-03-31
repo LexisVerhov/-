@@ -140,7 +140,7 @@ function keyboard_avr_speed_press(array) {
 
     document.addEventListener("wheel", function(e) {
         var cmilis = time - lastTime;
-        if(lastTime && cmilis < 2500) {
+        if(lastTime && cmilis < 350) {
             milis.push(cmilis);
         }
         lastTime = time;
