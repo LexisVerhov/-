@@ -71,8 +71,6 @@ document.addEventListener("mousedown", function (event) {
 
 document.addEventListener("mouseup", function (event) {
   if (event.which === 1) {
-    if (mouse_button_left.x == event.clientX &&
-        mouse_button_left.y == event.clientY){
         mouse_button_left.time = Date.now() - mouse_button_left.time;
         if(mouse_button_left.time > 1){
             a_mouse_button_left_speed.push(mouse_button_left.time);
