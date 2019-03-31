@@ -13,7 +13,8 @@ document.getElementById("stat").addEventListener("click", function (event) {
 
     "<b>Тач на телефоне</b>" + "<br>" +
     "===============" + "<br>" +
-    "Скорость клика пальцем: " + arrayAvr(a_touch_click_speed) + "<br>" +
+    "Скорость клика пальцем: " + calculate_touch(touch_array).time + "<br>" +
+    "Скорость движения пальца: " + calculate_touch(touch_array).speed + "<br><br>" +
 
     "<b>Клавиатура</b>" + "<br>" +
     "===============" + "<br>" +
@@ -65,16 +66,49 @@ function mouseSpeedAvr(array) {
   return sum / speed_array.length;
 }
 
-var touch_start = 0;
 var a_touch_click_speed = [];
+var a_mouse_move_path = [];
 
-document.addEventListener("touchstart", function (event) {
-    touch_start = Date.now();
+
+var touch_array = [];
+var touch_data = { x: 0, y: 0, time: 0, x2:0, y2:0, time2:0};
+
+document.addEventListener("touchstart", function(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    
+    touch_data.time = Date.now();
+    touch_data.x = event.changedTouches[0].pageX;
+    touch_data.y = event.changedTouches[0].pageY;
 });
 
 document.addEventListener("touchend", function (event) {
-    a_touch_click_speed.push(Date.now() - touch_start);
+   event.preventDefault();
+   event.stopPropagation();
+
+   touch_data.time2 = Date.now();
+   touch_data.x2 = event.changedTouches[0].pageX;
+   touch_data.y2 = event.changedTouches[0].pageY;
+
+   touch_array.push(touch_data);
 })
+
+function calculate_touch(array){
+  var speed_array = [];
+  var time_array = [];
+  for(var i=0; i < array.length; i++){
+    var time = array[i].time2 - array[i].time;
+    var x = array[i].x - array[i].x;
+    var y = array[i].y - array[i].y;
+    var speed = Math.sqrt(x * x + y * y) / time;
+    speed_array.push(speed);
+    time_array.push(time);
+  }
+  return {speed:arrayAvr(speed_array),time:arrayAvr(time_array)};
+}
+
+
+
 
 document.addEventListener("mousedown", function (event) {
   if (event.which == 1) {
