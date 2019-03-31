@@ -105,7 +105,7 @@ document.addEventListener("keydown", function (event) {
 document.addEventListener("keyup", function (event) {
   if(event.keyCode == s_keyboard_down.keycode)
     var speed = Date.now()-s_keyboard_down.time;
-    if(speed > 10)
+    if(speed > 5)
       a_keyboard_keydown_speed.push(Date.now()-s_keyboard_down.time);
 })
 
