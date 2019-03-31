@@ -6,20 +6,18 @@ const appDiv: HTMLElement = document.getElementById('app');
 appDiv.innerHTML = "<button id=\"stat\">Статистика</button>";
 
 document.getElementById("stat").addEventListener("click", function(event){
-    console.clear();
-    console.log("МЫШЬ");
-    console.log("===============");
-    console.log("Скорость движения мыши: " + mouseSpeedAvr(a_mouse_move_path));
-    console.log("Скорость клика левой кнопкой мыши: " + arrayAvr(a_mouse_button_left_speed));
-    console.log("Скорость клика средней кнопкой мыши: " + arrayAvr(a_mouse_button_middle_speed));
-    console.log("Скорость клика правой кнопкой мыши: " + arrayAvr(a_mouse_button_right_speed));
-    console.log("Скорость прокрутки: ");
-    console.log("Скорость отклика скрола мыши: ");
+    document.body.innerHTML += "<b>Мышь</b><br>" +
+    "Скорость движения мыши: " + mouseSpeedAvr(a_mouse_move_path) + "<br>" +
+    "Скорость клика левой кнопкой мыши: " + arrayAvr(a_mouse_button_left_speed) + "<br>" +
+    "Скорость клика средней кнопкой мыши: " + arrayAvr(a_mouse_button_middle_speed) + "<br>" +
+    "Скорость клика правой кнопкой мыши: " + arrayAvr(a_mouse_button_right_speed) + "<br>" +
+    "Скорость прокрутки: " + "<br>" +
+    "Скорость отклика скрола мыши: " + "<br><br>" +
 
-    console.log("\nКЛАВИАТУРА");
-    console.log("===============");
-    console.log("Скорость нажатия клавиш: ");
-    console.log("Скорость между печатью символов: ");
+    "<b>Клавиатура</b>" + "<br>" +
+    "===============" + "<br>" +
+    "Скорость нажатия клавиш: " + "<br>" +
+    "Скорость между печатью символов: " + "<br>";
 });
 
 
