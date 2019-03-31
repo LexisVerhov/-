@@ -11,6 +11,10 @@ document.getElementById("stat").addEventListener("click", function (event) {
     "Скорость клика левой кнопкой мыши: " + arrayAvr(a_mouse_button_left_speed) + "<br>" +
     "Скорость между прокруткой: " + scroll_calculate(array_scroll) + "<br><br>" +
 
+    "<b>Тач на телефоне</b>" + "<br>" +
+    "===============" + "<br>" +
+    "Скорость клика пальцем: " + arrayAvr(a_touch_click_speed) + "<br>" +
+
     "<b>Клавиатура</b>" + "<br>" +
     "===============" + "<br>" +
     "Скорость нажатия клавиш: " + arrayAvr(a_keyboard_keydown_speed) + "<br>" +
@@ -61,6 +65,17 @@ function mouseSpeedAvr(array) {
   return sum / speed_array.length;
 }
 
+var touch_start = 0;
+var a_touch_click_speed = [];
+
+document.addEventListener("touchstart", function (event) {
+    touch_start = Date.now();
+});
+
+document.addEventListener("touchend", function (event) {
+    a_touch_click_speed.push(Date.now() - touch_start);
+})
+
 document.addEventListener("mousedown", function (event) {
   if (event.which == 1) {
     mouse_button_left.time = Date.now();
@@ -71,11 +86,14 @@ document.addEventListener("mousedown", function (event) {
 
 document.addEventListener("mouseup", function (event) {
   if (event.which === 1) {
+    if (mouse_button_left.x == event.clientX &&
+        mouse_button_left.y == event.clientY){
         mouse_button_left.time = Date.now() - mouse_button_left.time;
-        if(mouse_button_left.time > 1){
+        if(mouse_button_left.time > 15){
             a_mouse_button_left_speed.push(mouse_button_left.time);
            }
         }
+    }
 })
 
 document.addEventListener("mousemove", function (event) {
