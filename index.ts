@@ -76,7 +76,6 @@ document.addEventListener("mouseup", function (event) {
             a_mouse_button_left_speed.push(mouse_button_left.time);
            }
         }
-    }
 })
 
 document.addEventListener("mousemove", function (event) {
