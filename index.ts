@@ -3,7 +3,7 @@ import './style.css';
 
 // Write TypeScript code!
 const appDiv: HTMLElement = document.getElementById('app');
-appDiv.innerHTML = "<button style=\"height:50px; width: 150px;\" id=\"stat\">Статистика</button><div id=\"stat-div\"></div>";
+appDiv.innerHTML = "<button style=\"height:50px; width: 150px;\" id=\"stat\">Статистика</button><br><input style=\"margin:10px 0 10px 0;\" placeholder=\"Нужно ввести что-то для теста\"></input><div id=\"stat-div\"></div>";
 
 document.getElementById("stat").addEventListener("click", function (event) {
   document.getElementById("stat-div").innerHTML = "<b>Мышь</b><br>" +
