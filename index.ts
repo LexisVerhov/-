@@ -74,8 +74,6 @@ var touch_array = [];
 var touch_data = { x: 0, y: 0, time: 0, x2:0, y2:0, time2:0};
 
 document.addEventListener("touchstart", function(event) {
-    event.preventDefault();
-    event.stopPropagation();
     
     touch_data.time = Date.now();
     touch_data.x = event.changedTouches[0].pageX;
@@ -83,9 +81,6 @@ document.addEventListener("touchstart", function(event) {
 });
 
 document.addEventListener("touchend", function (event) {
-   event.preventDefault();
-   event.stopPropagation();
-
    touch_data.time2 = Date.now();
    touch_data.x2 = event.changedTouches[0].pageX;
    touch_data.y2 = event.changedTouches[0].pageY;
