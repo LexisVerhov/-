@@ -9,14 +9,12 @@ document.getElementById("stat").addEventListener("click", function (event) {
   document.getElementById("stat-div").innerHTML = "<b>Мышь</b><br>" +
     "Скорость движения мыши: " + mouseSpeedAvr(a_mouse_move_path) + "<br>" +
     "Скорость клика левой кнопкой мыши: " + arrayAvr(a_mouse_button_left_speed) + "<br>" +
-    "Скорость между прокруткой: " + arrayAvr(milis) + "<br><br>" +
+    "Скорость между прокруткой: " + scroll_calculate(array_scroll) + "<br><br>" +
 
     "<b>Клавиатура</b>" + "<br>" +
     "===============" + "<br>" +
     "Скорость нажатия клавиш: " + arrayAvr(a_keyboard_keydown_speed) + "<br>" +
     "Скорость печати: " + keyboard_avr_speed_press(a_keyboard_keyspeed) + "<br>";
-
-    console.log(milis);
 });
 
 
@@ -129,20 +127,19 @@ function keyboard_avr_speed_press(array) {
 
 
 
-    var milis = [];
-    var lastTime = 0;
-    var d = new Date();
-    var time = d.getTime();
-
-    setInterval(function() {
-        time++;
-    }, 1);
-
-    document.addEventListener("wheel", function(e) {
-        var cmilis = time - lastTime;
-        if(lastTime && cmilis < 350) {
-            milis.push(cmilis);
-        }
-        lastTime = time;
+    var array_scroll = [];
+    document.addEventListener("wheel", function(event) {
+        array_scroll.push(Date.now());
     });
 
+    function scroll_calculate(array){
+        var time_array = [];
+        for(var i = 1; i<array.length; i++){
+          var time = (array[i]-array[i-1]);
+          if(time < 500){
+              time_array.push(array[i]-array[i-1]);
+          }
+        }
+        var time_avg = arrayAvr(time_array);
+        return time_avg;
+    }
