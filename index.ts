@@ -3,10 +3,10 @@ import './style.css';
 
 // Write TypeScript code!
 const appDiv: HTMLElement = document.getElementById('app');
-appDiv.innerHTML = "<button id=\"stat\">Статистика</button>";
+appDiv.innerHTML = "<button id=\"stat\">Статистика</button><div id=\"stat-div\"></div>";
 
 document.getElementById("stat").addEventListener("click", function(event){
-    document.body.innerHTML += "<b>Мышь</b><br>" +
+    document.getElementById("stat-div").innerHTML = "<b>Мышь</b><br>" +
     "Скорость движения мыши: " + mouseSpeedAvr(a_mouse_move_path) + "<br>" +
     "Скорость клика левой кнопкой мыши: " + arrayAvr(a_mouse_button_left_speed) + "<br>" +
     "Скорость клика средней кнопкой мыши: " + arrayAvr(a_mouse_button_middle_speed) + "<br>" +
